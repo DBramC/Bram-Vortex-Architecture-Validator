@@ -1,1 +1,1 @@
-Architecture Validator for Bram Vortex
+Architecture Validator for Bram-Vortex
