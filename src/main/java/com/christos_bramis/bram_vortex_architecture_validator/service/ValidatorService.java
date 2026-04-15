@@ -92,6 +92,10 @@ public class ValidatorService {
                     3. **Syntax & Completeness**: Fix any missing variables, broken YAML spacing, or incomplete Terraform blocks.
                     4. **Do NOT delete files**: You must return ALL the files provided in the 'GENERATED FILES' section, including the ones you did not modify.
                     5. **PRESERVE DIRECTORY STRUCTURE (CRITICAL)**: You MUST use the EXACT SAME keys (file paths) provided in the 'GENERATED FILES CURRENT STATE' JSON. Do not rename files or remove the 'infrastructure/' or 'configuration/' folder prefixes.
+                    6. **SECRET MANAGEMENT (CRITICAL)**: DO NOT hardcode any passwords, API keys, or tokens. Actual credentials will be injected dynamically by the Execution Service later.
+                       - For Terraform (.tf): Use variables (e.g., `var.db_password`). Ensure these variables are properly declared in an `infrastructure/variables.tf` file without sensitive default values. Create it if it doesn't exist.
+                       - For Ansible (.yml): Use environment variable lookups (e.g., `"{{ lookup('env', 'DB_PASSWORD') }}"`).
+                       - For GitHub Actions (.yml): Use GitHub Secrets (e.g., `${{ secrets.DB_PASSWORD }}`).
 
                     OUTPUT FORMAT (CRITICAL):
                         - Respond ONLY with a SINGLE, VALID JSON object containing ALL the final, validated files.
@@ -101,6 +105,7 @@ public class ValidatorService {
                     EXPECTED JSON SCHEMA:
                     {
                         "infrastructure/main.tf": "<validated content>",
+                        "infrastructure/variables.tf": "<validated content>",
                         "configuration/playbook.yml": "<validated content>",
                         ".github/workflows/deploy.yml": "<validated content>",
                         "...": "..."
