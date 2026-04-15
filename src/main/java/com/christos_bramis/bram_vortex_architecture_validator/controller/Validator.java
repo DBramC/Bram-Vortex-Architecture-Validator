@@ -27,7 +27,7 @@ public class Validator {
      * Endpoint που δέχεται το Webhook από τον Repo Analyzer.
      * Πλέον το userId έρχεται από το επικυρωμένο JWT Token.
      */
-    @PostMapping("/generate/{analysisJobId}")
+    @PostMapping("/validate/{analysisJobId}")
     public ResponseEntity<String> startValidation(
             @PathVariable String analysisJobId,
             Authentication auth) {
