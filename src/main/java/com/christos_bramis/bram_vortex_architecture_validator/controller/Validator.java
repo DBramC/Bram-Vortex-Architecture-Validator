@@ -64,8 +64,8 @@ public class Validator {
                         return ResponseEntity.status(HttpStatus.FORBIDDEN).<byte[]>build();
                     }
 
-                    // ΕΔΩ Η ΔΙΟΡΘΩΣΗ: Προσθήκη ελέγχου length == 0
-                    if (!"COMPLETED".equals(job.getStatus()) || job.getValidatorZip() == null || job.getValidatorZip().length == 0) {
+                    // ΕΔΩ Η ΔΙΟΡΘΩΣΗ: Προσθήκη ελέγχου length == 0 και σωστή χρήση του getMasterZip()
+                    if (!"COMPLETED".equals(job.getStatus()) || job.getMasterZip() == null || job.getMasterZip().length == 0) {
                         return ResponseEntity.status(HttpStatus.ACCEPTED).<byte[]>build(); // Επιστρέφει 202
                     }
 
@@ -75,7 +75,7 @@ public class Validator {
                     headers.setContentDispositionFormData("attachment", "vortex-master-" + analysisJobId + ".zip");
                     headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
 
-                    return new ResponseEntity<>(job.getValidatorZip(), headers, HttpStatus.OK);
+                    return new ResponseEntity<>(job.getMasterZip(), headers, HttpStatus.OK);
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
