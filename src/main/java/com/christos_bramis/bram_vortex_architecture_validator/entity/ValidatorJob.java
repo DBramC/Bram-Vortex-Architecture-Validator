@@ -26,7 +26,7 @@ public class ValidatorJob {
     // ΕΔΩ ΕΙΝΑΙ Η ΜΑΓΕΙΑ: Η Postgres θα το κάνει BYTEA (BLOB)
     // ΠΡΟΣΟΧΗ: Το όνομα της στήλης πρέπει να είναι "master_zip" όπως στο SQL!
     @JdbcTypeCode(SqlTypes.BINARY)
-    @Column(name = "master_zip", columnDefinition = "bytea")
+    @Column(name = "validated_master_zip", columnDefinition = "bytea")
     private byte[] masterZip;
 
     // --- Getters & Setters ---
