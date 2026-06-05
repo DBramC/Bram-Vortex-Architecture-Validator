@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/validator/generate/**").authenticated()
                         .requestMatchers("/validator/download/**").authenticated()
                         .requestMatchers("/validator/status/**").authenticated()
+                        .requestMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 )
 
